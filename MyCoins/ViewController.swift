@@ -72,7 +72,8 @@ class ViewController: UIViewController {
         var dataEur:[(x: Int, y: Double)] = []
         var dataGbp:[(x: Int, y: Double)] = []
         var dataArs:[(x: Int, y: Double)] = []
-        var dataBtc:[(x: Int, y: Double)] = []
+        //var dataBtc:[(x: Int, y: Double)] = []
+        
         
         for (index, element) in self.hoursList.enumerated() {
             dataUsd.append((x: element, y: Double(self.usdBidList[index].floatValue)))
@@ -81,8 +82,10 @@ class ViewController: UIViewController {
             dataEur.append((x: element, y: Double(self.eurBidList[index].floatValue)))
             dataGbp.append((x: element, y: Double(self.gbpBidList[index].floatValue)))
             dataArs.append((x: element, y: Double(self.arsBidList[index].floatValue)))
-            dataBtc.append((x: element, y: Double(self.btcBidList[index].floatValue)))
+            //dataBtc.append((x: element, y: Double(self.btcBidList[index].floatValue)))
         }
+ 
+       
         
         let seriesUsd = ChartSeries(data: dataUsd)
         seriesUsd.color = ChartColors.purpleColor()
@@ -106,9 +109,9 @@ class ViewController: UIViewController {
         seriesGbp.area = true
         //dataArs[0] = (x: 0, y: 4.0)
         
-        //let seriesArs = ChartSeries(data: dataArs)
-        //seriesArs.color = ChartColors.greenColor()
-        //seriesArs.area = true
+        let seriesArs = ChartSeries(data: dataArs)
+        seriesArs.color = ChartColors.greenColor()
+        seriesArs.area = true
         
         // Use `xLabels` to add more labels, even if empty
         self.chart.xLabels = [0, 3, 6, 9, 12, 15, 18, 21, 24]
@@ -116,11 +119,11 @@ class ViewController: UIViewController {
         // Format the labels with a unit
         self.chart.xLabelsFormatter = { String(Int(round($1))) + "h" }
         
-        self.chart.minY = 2
+        self.chart.minY = 0
         self.chart.maxY = 5
         
         
-        self.chart.add([seriesUsd,seriesUsdt,seriesCad,seriesEur,seriesGbp])
+        self.chart.add([seriesUsd,seriesUsdt,seriesCad,seriesEur,seriesGbp,seriesArs])
     }
     
     func getData(){
